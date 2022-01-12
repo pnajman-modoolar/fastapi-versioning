@@ -31,6 +31,7 @@ def VersionedFastAPI(
     prefix_format: str = "/v{major}_{minor}",
     default_version: Tuple[int, int] = (1, 0),
     enable_latest: bool = False,
+    latest_prefix: str = "/latest",
     **kwargs: Any,
 ) -> FastAPI:
     parent_app = FastAPI(
@@ -73,7 +74,7 @@ def VersionedFastAPI(
             ...
 
     if enable_latest:
-        prefix = "/latest"
+        prefix = latest_prefix or "/latest"
         major, minor = version
         semver = version_format.format(major=major, minor=minor)
         versioned_app = FastAPI(
