@@ -41,7 +41,7 @@ def VersionedFastAPI(
         list
     )
     version_routes = [
-        version_to_route(route, default_version) for route in app.routes
+        version_to_route(route, default_version) for route in app.routes if isinstance(route, APIRoute)
     ]
 
     for version, route in version_routes:
